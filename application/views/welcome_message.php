@@ -59,8 +59,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="<?php echo base_url('assets/js/popper.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/ie10-viewport-bug-workaround.js'); ?>"></script>    
+    
 <script>
+    
+     function Site_Url(url){  return '<?php echo site_url(); ?>' + url; }
+     function Base_Url(url){  return '<?php echo base_url(); ?>' + url; }
+    
      var map;
+     var advogados = [];
     
       function initMap() {
         // Create a map object and specify the DOM element for display.
@@ -71,23 +81,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
         
         centralizar()
-        addMarker();
+        listarAtivos();
       }
       
       
-      function addMarker() {
-         var marker = new google.maps.Marker({
-           position: {lat: -22.892932, lng: -43.104665},
-           label: "teste",
-           map: map
-         });
-      }
+      
       
       function centralizar(){
          navigator.geolocation.getCurrentPosition(function(position) { 
             map.panTo({lat: position.coords.latitude, lng: position.coords.longitude})
          });
       }
+      
+      function listarAtivos(){
+           $.ajax({
+                type: "GET",
+                url: Site_Url("/welcome/listarAtivos"),
+                success: function (data) {
+                  //console.log(data);
+                }
+            })
+            .done(function(data) {
+               var ret = $.parseJSON(data);
+               for (i in ret) { 
+                    var marker = new google.maps.Marker({
+                        position: {lat: parseFloat(ret[i].Latitude), lng: parseFloat(ret[i].Longitude)},
+                        //label: ret[i].Nome,
+                        map: map,
+                        icon: Base_Url('assets/imagens/adv.png')
+                       
+                    });
+                    advogados.push(marker);
+               }
+            })
+            .always(function() {
+               // select.removeAttr('disabled');
+               // selectuf.removeAttr('disabled');
+            });
+          
+      }
+      
+     
       
       
       
@@ -97,11 +131,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGwuKbCfmuR1zT9Onwa35bZOyReQMAt20&callback=initMap" async defer></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"><\/script>')</script>
-<script src="<?php echo base_url('assets/js/popper.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/ie10-viewport-bug-workaround.js'); ?>"></script>
+
 
 </body>
 </html>

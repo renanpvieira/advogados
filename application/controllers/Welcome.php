@@ -17,4 +17,14 @@ class Welcome extends CI_Controller {
             
             $this->load->view('welcome_message', $dados);
 	}
+        
+        public function listarAtivos()
+        {
+           // print_r(json_encode($this->advogado->listarTodosAtivos()));
+            
+            echo json_encode($this->advogado->listarTodosAtivos());
+        }
+        
+        
+        
 }
