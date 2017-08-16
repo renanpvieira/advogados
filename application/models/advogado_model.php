@@ -16,7 +16,11 @@ class Advogado_model extends CI_Model {
    }
    
     public function listarTodosAtivos(){
-	return $this->db->get_where('advogado', array('Estatus' => 1))->result_array();
+	$this->db->select('usuario.UsuarioId, Latitude, Longitude, Nome,  Descricao, Telefone1, Telefone2, Whatszap, Email, OAB');
+        $this->db->from('advogado');
+        $this->db->join('usuario', 'advogado.UsuarioId = usuario.UsuarioId');
+        $this->db->where('usuario.Estatus', 1);
+        return $this->db->get()->result_array();
     }
    
  

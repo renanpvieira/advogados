@@ -320,6 +320,11 @@ class CI_Security {
 	{
 		return $this->_csrf_token_name;
 	}
+        
+        public function get_csrf_cookie_name()
+	{
+		return $this->_csrf_cookie_name;
+	}
 
 	// --------------------------------------------------------------------
 

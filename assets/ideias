@@ -1,0 +1,6 @@
+criar uma hash para buscar direto pelo adv
+botao de curtir na janela do adv
+
+http://maps.googleapis.com/maps/api/geocode/json?latlng=-22.891067,-43.119355&sensor=false
+
+https://developers.google.com/maps/documentation/javascript/infowindows?hl=pt-br
