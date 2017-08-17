@@ -1,0 +1,21 @@
+/* Show it is fixed to the top */
+body {
+        /* min-height: 75rem;*/
+        padding-top: 3.4rem;
+    }
+        
+    html, body, #map {
+        width: 100%;   height: 100%;
+        
+    }
+    .btn-no-border { border: none; }
+    .modal-form-msg {width: 100%; }
+    .modal-form-msg p {padding: 0px; margin: 0px; margin-bottom: 3px; font-size: 13px; }
+    
+    
+    .janela-adv p {margin: 4px; padding: 0px;}
+    .janela-nome {color: #464a4e; font-size: 16px; font-weight: bold; }
+    .janela-sutitulo {padding-top: 10px !important; font-weight: bold; }
+    
+    h3.texto-msg {text-align:center; margin-top: 85px; color: #002752; }
+    form.form-usuario {margin-top: 60px;}

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuario_model extends CI_Model {
+class Chave_model extends CI_Model {
 
 	
    public function __construct()
@@ -10,16 +10,11 @@ class Usuario_model extends CI_Model {
                 // Your own constructor code
    }
  
-   /*
-    public function listarTodos(){
-       return $this->db->get('usuario')->result_array();
-    }
-    * 
-    */
+   
  
    
     public function salvar($dados){
-       $this->db->insert('usuario', $dados);
+       $this->db->insert('chave', $dados);
        if($this->db->affected_rows() == 1){
          return $this->db->insert_id();
        }else{
@@ -27,10 +22,12 @@ class Usuario_model extends CI_Model {
        }
     }
     
-    public function deletar($id){
-       $this->db->delete('usuario', array('UsuarioId' => $id));
-       return $this->db->affected_rows(); 
+    
+    public function buscarChave($chave){
+        return $this->db->get_where('chave', array('Chave' => $chave))->row_array();;
     }
+    
+    
    
  
    
