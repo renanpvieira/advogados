@@ -1,4 +1,9 @@
+
+<script type="text/javascript" src="<?php echo base_url('assets/js/layout.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/script-base.js'); ?>" ></script> 
 <script>
+     
+     $(".button-collapse").sideNav();
      
      var map;
      var advogados = [];
@@ -14,6 +19,8 @@
      
     
      function initMap() {
+       
+         
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -21.579911, lng: -43.761514},
           scrollwheel: false,
@@ -66,6 +73,10 @@
       }
       
       function janelaAdvogado(){
+          
+          $( ".button-collapse" ).click();
+          
+          /*
           var html = '<div class="janela-adv">';
           var dados = this.metadata.dados;
           
@@ -88,6 +99,7 @@
           
           var janela = new google.maps.InfoWindow({ content: html });
           janela.open(map, this);
+          */
       }
       
       
@@ -97,27 +109,27 @@
       $(document).ready(function () {
    
     
-      $("button[name='btn-cadastar']").click(function () {
-            var btn = this; 
-            btn.disabled = true;// EVITA DOUBLE-CLICK
-            var form = $("form[name='cadastro']").serializeArray();
-            
-            $.ajax({
-                type: "POST",
-                url: Site_Url("/welcome/cadastro"),
-                data: GeraSecurityForm(form),
-                success: function (data) {
-                   btn.disabled = true;
-                }
-            })
-            .done(function(data) {
-                var ret = $.parseJSON(data);
-                displayFormMsg(ret.formValidate, "#cadastro-msg", ret.msg);
-            })
-            .always(function() {
-                btn.disabled = false;
+            $("button[name='btn-cadastar']").click(function () {
+                  var btn = this; 
+                  btn.disabled = true;// EVITA DOUBLE-CLICK
+                  var form = $("form[name='cadastro']").serializeArray();
+
+                  $.ajax({
+                      type: "POST",
+                      url: Site_Url("/home/cadastro"),
+                      data: GeraSecurityForm(form),
+                      success: function (data) {
+                         btn.disabled = true;
+                      }
+                  })
+                  .done(function(data) {
+                      var ret = $.parseJSON(data);
+                      displayFormMsg(ret.formValidate, "#cadastro-msg", ret.msg);
+                  })
+                  .always(function() {
+                      btn.disabled = false;
+                  });
             });
-        });
         
     });
 
