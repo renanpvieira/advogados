@@ -1,9 +1,23 @@
-
-<script type="text/javascript" src="<?php echo base_url('assets/js/layout.js'); ?>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/script-base.js'); ?>" ></script> 
 <script>
      
-     $(".button-collapse").sideNav();
+    $(document).ready(function () {
+        $("#sidebar").niceScroll({ cursorcolor: '#53619d', cursorwidth: 4, cursorborder: 'none'});
+
+        $('#dismiss, .overlay').on('click', function () {
+            $('#sidebar').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+             $('#sidebar').addClass('active');
+        });
+   });
+
+     
      
      var map;
      var advogados = [];
@@ -28,9 +42,15 @@
         });
         
         map.addListener('dragend', movimento);
+        map.addListener('click', clickMapa);
         
         centralizar();
         listarAtivos();
+     }
+     
+     
+     function clickMapa(){
+        $('#sidebar').removeClass('active');
      }
       
       
@@ -74,7 +94,27 @@
       
       function janelaAdvogado(){
           
-          $( ".button-collapse" ).click();
+          var dados = this.metadata.dados;
+          
+          $('#sidebar-adv-nome').text(dados.Nome);
+          
+          if(dados.Descricao.length > 5){ 
+            $('#sidebar-adv-descricao').text(dados.Descricao);
+          }else{
+            $('#sidebar-adv-descricao').text("Não informado!");
+          }  
+          
+          if(dados.OAB.length > 2){ 
+             $('#sidebar-adv-oab').text(dados.OAB);
+          }else{
+             $('#sidebar-adv-oab').text("Não informado!");
+          }
+          
+          
+          
+          $('#sidebar').addClass('active');
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
           
           /*
           var html = '<div class="janela-adv">';

@@ -1,15 +1,16 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Welcome to CodeIgniter</title>
         
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/advogado.css'); ?>" >
      
+  
     
     <script>
         function GeraSecurityForm(form){
@@ -27,53 +28,86 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           width: 100%;   height: 100%;
        
          }
-         li.li-advogado {background-color: #f5f5f5; padding: 28px;}
-         li.li-advogado p {color: #000000; font-size: 13px; text-align: justify; margin: 0px;}
-         p.li-advogado-subtitulo { color: #9b9b9c !important; }
+         
+         
+         nav.menu-adv {z-index: 10 !important;}
+         
+         
+         #sidebar-interna {background-color: #f5f5f5; padding: 28px;}
+         #sidebar-interna p {color: #000000; font-size: 13px; text-align: justify; margin: 0px;}
+         #sidebar-interna p.li-advogado-subtitulo { color: #9b9b9c !important; }
         
     </style>
 	
 </head>
 <body class="fixed-sn black-skin">
     <!--Double navigation-->
-    <header>
+    
         <!-- Sidebar navigation -->
-        <ul id="slide-out" class="side-nav fixed custom-scrollbar">
-            <li class="li-advogado">
+        
+        <nav id="sidebar">
+            <div id="sidebar-interna">
+                <div id="dismiss"> <i class="glyphicon glyphicon-arrow-left"></i> </div>
                 <p class="li-advogado-subtitulo">nome</p>
-                <p>Luiz Fernando Freire Vieira</p>
+                <p id="sidebar-adv-nome">Não informado</p>
                 <br />
                 <p class="li-advogado-subtitulo">experiência</p>
-                <p>LoremIpsum360 ° é um gerador on-line falso texto livre. Ele oferece um simulador de texto completo para gerar texto de substituição ou texto alternativo para seus modelos. Possui textos aleatórios diferentes em latim e cirílico para gerar exemplos de textos em diferentes línguas.</p>
+                <p id="sidebar-adv-descricao">Não informado!</p>
                 <br />
-                <p class="li-advogado-subtitulo">telefones</p>
+                <p class="li-advogado-subtitulo">contatos</p>
                 <p>(21) 2628-1743 / (11) 9999-2211</p>
-                
-                
-                
-            </li>
-            
-        </ul>
-        <!--/. Sidebar navigation -->
-        <!-- Navbar -->
-        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
-            <!-- SideNav slide-out button -->
-            <div class="float-left">
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+                <p>(11) 9999-2211</p>
+                <p>renanvieira@id.uff.br</p>
+                <br />
+                <p class="li-advogado-subtitulo">endereço</p>
+                <p>Estrada da paciência 3355, Maria Paula, São Gonçalo - RJ</p>
+                <br />
+                <p class="li-advogado-subtitulo">registro na OAB</p>
+                <p id="sidebar-adv-oab">Não informado</p>
+                <br />
+                <p class="li-advogado-subtitulo">áreas de atuação</p>
+                <p id="sidebar-adv-area">Trabalho; Cívil; Criminal.</p>
             </div>
-            <!-- Breadcrumb-->
-            <div class="breadcrumb-dn mr-auto">
-                <p>Material Design for Bootstrap</p>
-            </div>
-            <ul class="nav navbar-nav nav-flex-icons ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#cadastro" ><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Sou advogado, quero me cadastar!</span></a>
-                </li>
-            </ul>
         </nav>
-        <!-- /.Navbar -->
         
-         <div class="modal fade" id="cadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark menu-adv">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+         </nav>
+        
+       
+        
+        
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -83,23 +117,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form name="cadastro">
+                  <form>
                     <div class="form-group">
-                      <input type="text" name="Login" class="form-control" id="recipient-name" placeholder="Digite seu e-mail">
+                      <label for="recipient-name" class="form-control-label">Recipient:</label>
+                      <input type="text" class="form-control" id="recipient-name">
                     </div>
                     <div class="form-group">
+                      <label for="message-text" class="form-control-label">Senha</label>
                       <input type="password" name="Senha" class="form-control" id="recipient-name" placeholder="Digite sua senha">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
-                    <div id="cadastro-msg" class="modal-form-msg"></div>
-                    <button type="button" name="btn-cadastar" class="btn btn-primary">Salvar</button>
+                  <button type="button" name="btn-cadastar" class="btn btn-primary">Salvar</button>
                 </div>
               </div>
             </div>
-        </div>
+       </div>
+  
+
+
+
+
+        
+
+         
         
         
-    </header>
-    <!--/.Double navigation-->
+        
+        
+        
+   
