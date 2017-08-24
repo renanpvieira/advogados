@@ -40,6 +40,16 @@
          
          .texto-msg {text-align: center; }
          #mapCadastro {min-height: 280px;}
+         .form-usuario-label-titulo {color: #343a40; font-size: 20px; width: 100%; border-bottom: solid 1px #343a40; padding-bottom:  6px;}
+         
+         
+         #form-cadasto-map-msg p {font-size: 13px; margin: 0px; padding: 0px; }
+         div.erro p { color: red !important; }
+         div.sucesso p { color: #007bff !important; }
+         
+         
+         .right {text-align: right;}
+         
         
     </style>
 	

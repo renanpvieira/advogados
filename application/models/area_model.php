@@ -15,7 +15,18 @@ class Area_model extends CI_Model {
 	return $this->db->get('area')->result_array();
    }
    
+   public function salvarBatch($dados){
+	$this->db->insert_batch('advogado-area', $dados);
+   }
+   
+   public function deleteAdvogado($id){
+	$$this->db->where('AdvogadoId', $id);
+        $this->db->delete('advogado-area');
+   }
+   
     
+   
+   
    
  
    

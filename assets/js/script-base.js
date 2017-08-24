@@ -1,10 +1,10 @@
  function displayFormMsg(valid, div, msg) {
 
             if(valid){
-                $(div).css('color', '#d9edf7');
+                $(div).addClass('sucesso');
             }else{
-                $(div).css('color', '#c82333');
-            }
+                $(div).addClass('erro');
+             }
 
             $(div).html('');
             $(div).append(msg);

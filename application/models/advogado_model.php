@@ -22,6 +22,11 @@ class Advogado_model extends CI_Model {
         $this->db->where('usuario.Estatus', 1);
         return $this->db->get()->result_array();
     }
+    
+    public function salvar($dados){
+       $this->db->insert('advogado', $dados);
+       return (($this->db->affected_rows() > 0) ? $this->db->insert_id() : 0);
+    }
    
  
    

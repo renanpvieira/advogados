@@ -11,6 +11,7 @@ class Usuario extends MY_Controller {
                $this->load->model('usuario_model', 'usuario');
                $this->load->model('chave_model', 'chave');
                $this->load->model('area_model', 'area');
+               $this->load->model('cidade_model', 'cidade');
                
                $scripts = Array('cadastro.js');
                $this->SetScript($scripts);
@@ -42,6 +43,79 @@ class Usuario extends MY_Controller {
                $this->setDados('msg', 'Usuário não encontrado!');
                $this->displaySite('tela-mensagem');
             }
+            
+        }
+        
+        public function salvar()
+        {
+            $post = $this->input->post();
+            
+            $this->form_validation->set_rules('Nome', 'Nome', 'trim|required|min_length[2]|max_length[60]');
+            $this->form_validation->set_rules('Descricao', 'Descrição', 'trim|max_length[3000]');
+            
+            $this->form_validation->set_rules('Telefone1', 'Telefone', 'trim|required|max_length[15]');
+            $this->form_validation->set_rules('Telefone2', 'Telefone', 'trim|max_length[15]');
+            $this->form_validation->set_rules('Whatszap', 'Whatszap', 'trim|max_length[15]');
+            $this->form_validation->set_rules('Email', 'E-mail', 'trim|required|min_length[6]|max_length[255]|valid_email');
+            $this->form_validation->set_rules('OAB', 'OAB', 'trim|max_length[15]');
+            
+            $this->form_validation->set_rules('Logradouro', 'Logradouro', 'trim|required|max_length[255]');
+            $this->form_validation->set_rules('Numero', 'Número', 'trim|max_length[12]');
+            $this->form_validation->set_rules('Bairro', 'Bairro', 'trim|required|max_length[70]');
+            $this->form_validation->set_rules('Cidade', 'Cidade', 'trim|required|max_length[100]');
+            $this->form_validation->set_rules('uf', 'UF', 'trim|required|max_length[2]');
+            
+            if (($this->form_validation->run()) && (array_key_exists("areas", $post)))
+            {
+                $areas = $post['areas'];
+                unset($post['areas']); /* Removendo do POST */
+                
+                /* Removendo com o null para o where  */
+                if(strlen($post['Latitude']) < 3){ $post['Latitude'] = null;   }
+                if(strlen($post['Longitude']) < 3){ $post['Longitude'] = null;   }
+                
+                $res = $this->cidade->listarDescricao($post['Cidade'], $post['uf']);
+                unset($post['Cidade']); /* Removendo do POST */
+                unset($post['uf']);
+                
+                $post['CidadeId'] = 1;
+                $post['AcheiCidade'] = 0;
+                
+                if(count($res) >= 1){
+                   $post['CidadeId'] =  $res[0]['CidadeId']; 
+                }
+                
+                if(count($res) == 1){
+                   $post['AcheiCidade'] = 1;  /* Melhor dos Mundos */ 
+                }
+                
+                unset($res);
+                //$res = $this->advogado->salvar($post);
+                $res = 5;
+                if($res > 1){
+                    $dados = array();
+                    foreach ($areas as $area){
+                      array_push($dados, array('AdvogadoId' => $res, 'AreaId' =>  $area));
+                    }
+                    $this->area->deleteAdvogado($res);
+                    $this->area->salvarBatch($dados);
+                }
+                
+                echo json_encode($dados);
+                
+                
+            }else{
+              $msg =  validation_errors();
+              if(!array_key_exists("areas", $post)){
+                  $msg =  $msg . '<p>Selecione pelo menos 1 área de atuação!</p>'; 
+              }
+              $this->postResult(False, $msg);
+            }
+          
+            
+            
+            
+            //$this->postResult(False, "<p>ggg</p>");
             
         }
         

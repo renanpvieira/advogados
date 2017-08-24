@@ -40,17 +40,41 @@
         */
         
         $("button[name='btn-busca-mapa']").click(function () {
-            
-            
-            if (typeof marker != 'undefined'){
-               marker.setMap(null);  
-            }
+           
+            var valido = true;
+            var msg = "";
             
             var endereco = "";
             var logradouro = $.trim($("input[name='Logradouro']").val());
             var bairro = $.trim($("input[name='Bairro']").val());
             var cidade = $.trim($("input[name='Cidade']").val());
             var numero = $.trim($("input[name='Numero']").val());
+            
+            if (logradouro.length < 3) {
+                valido = false;
+                msg = '<p>O Logradouro precisa ser preenchido!</p>';
+            }
+            
+            if (bairro.length < 3) {
+                valido = false;
+                msg = msg + '<p>O Bairro precisa ser preenchido!</p>';
+            }
+            
+            if (cidade.length < 3) {
+                valido = false;
+                msg = msg + '<p>A Cidade precisa ser preenchida!</p>';
+            }
+            
+            if(!valido){
+                displayFormMsg(false, '#form-cadasto-map-msg', msg);
+                return;
+            }
+            
+            
+            if (typeof marker != 'undefined'){
+               marker.setMap(null);  
+            }
+            
                        
             endereco = logradouro;
             if(numero.length > 1){ endereco = endereco + ", " + numero; }
@@ -73,7 +97,10 @@
                   });
                   
                 } else {
-                  console.log('Geocode was not successful for the following reason: ' + status);
+                  /*Enviar esse erro posteriormente para um log via ajax*/
+                   console.log('Geocode was not successful for the following reason: ' + status);
+                  
+                  
                 }
             });
             
@@ -81,6 +108,86 @@
             //console.log(endereco);   
             
         });
+        
+        /*
+         $("button[name='btn-cadastro-usuario']").click(function () {
+             
+             //alert($('input:checkbox:checked').length);
+             //console.log();
+         });
+        */
+       
+       
+        $("form[name='cadastro-usuario']").submit(function(e) {
+            e.preventDefault();
+            
+//            if($('input:checkbox:checked').length == 0){
+//               displayFormMsg(false, '#form-cadasto-msg', '<p>Selecione pelo menos 1 área de atuação!</p>'); 
+//            }
+            
+            var form = $(this).serializeArray();
+            
+            
+            
+            form[0].value = '22.222222';
+            form[1].value = '34.23232';
+            form[2].value = 'Nome teste';
+            form[3].value = 'Descricao Terste';
+            form[4].value = 'tel 1 teste';
+            form[5].value = 'Tel 2 teste';
+            form[6].value = 'ZAPZAP teste';
+            form[7].value = 'teste@teste.com.br';
+            form[8].value = 'oab teste';
+            form[9].value = 'logradouro teste';
+            form[10].value = 'numero teste';
+            form[11].value = 'bairro teste';
+            form[12].value = 'cidade teste';
+            form[13].value = '19';
+            
+            
+            /* PODE SER QUE O USUARIO NAO TENHA CLICADO NO BOTAO */
+//            if (form[0].value.length < 3 || form[1].value.length < 3) {
+//                var endereco = "";
+//                var logradouro = $.trim($("input[name='Logradouro']").val());
+//                var bairro = $.trim($("input[name='Bairro']").val());
+//                var cidade = $.trim($("input[name='Cidade']").val());
+//                var numero = $.trim($("input[name='Numero']").val());
+//                
+//                endereco = logradouro;
+//                if(numero.length > 1){ endereco = endereco + ", " + numero; }
+//                if(bairro.length > 2){ endereco = endereco + ", " + bairro; }
+//                if(cidade.length > 2){ endereco = endereco + ", " + cidade; }
+//                
+//                
+//                if(endereco.length > 5){
+//                    var geocoder = new google.maps.Geocoder();
+//                    geocoder.geocode({'address': endereco}, function(results, status) {
+//                        if (status === 'OK') {
+//                          form[0].value = results[0].geometry.location.lat();
+//                          form[1].value = results[0].geometry.location.lng();
+//                        } else {
+//                          /*Enviar esse erro posteriormente para um log via ajax*/
+//                           console.log('Geocode was not successful for the following reason: ' + status);
+//                        }
+//                    });
+//                }
+//            }
+            
+
+            $.ajax({
+                type: "POST",
+                url: Site_Url("/usuario/salvar"),
+                data: GeraSecurityForm(form),
+                success: function (data) {
+                    //var ret = $.parseJSON(data);
+                    //displayFormMsg(ret.formValidate, "#form-cadasto-msg", ret.msg);
+                    console.log(data);
+                    
+                   
+                }
+            });
+        });
+        
         
         
      
