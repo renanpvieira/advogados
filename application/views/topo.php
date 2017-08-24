@@ -36,6 +36,10 @@
          #sidebar-interna {background-color: #f5f5f5; padding: 28px;}
          #sidebar-interna p {color: #000000; font-size: 13px; text-align: justify; margin: 0px;}
          #sidebar-interna p.li-advogado-subtitulo { color: #9b9b9c !important; }
+         
+         
+         .texto-msg {text-align: center; }
+         #mapCadastro {min-height: 280px;}
         
     </style>
 	
@@ -78,27 +82,16 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+               
                 <li class="nav-item">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Sou advogado, quero me cadastrar!</button>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
+               
+                
               </ul>
               <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="text" placeholder="Ex.: Trabalhista, São Paula" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
               </form>
             </div>
          </nav>
@@ -119,8 +112,8 @@
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <label for="recipient-name" class="form-control-label">Recipient:</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <label for="recipient-name" class="form-control-label">Nome</label>
+                      <input type="text" class="form-control" id="recipient-name" placeholder="Digite o seu nome" >
                     </div>
                     <div class="form-group">
                       <label for="message-text" class="form-control-label">Senha</label>

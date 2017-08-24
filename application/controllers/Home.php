@@ -10,6 +10,9 @@ class Home extends MY_Controller {
                $this->load->model('advogado_model', 'advogado');
                $this->load->model('usuario_model', 'usuario');
                $this->load->model('chave_model', 'chave');
+               
+               $scripts = Array('home.js');
+               $this->SetScript($scripts);
         }
         
     

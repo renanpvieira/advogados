@@ -20,6 +20,11 @@ class MY_Controller  extends CI_Controller {
           $this->dados[$key] = $d;
        }
        
+       public function SetScript($s){
+        $this->dados['scriptsJs'] = $s;
+      }
+
+       
        public function displaySite($view)
        {
             $this->load->view('topo', $this->dados);
@@ -30,6 +35,6 @@ class MY_Controller  extends CI_Controller {
 	
 	
         
-        
+        //http://localhost:27015/advogados/index.php/usuario/chave/904ecce8303932ee8dc511e90d56c9a0120170817174736000000
         
 }

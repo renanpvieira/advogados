@@ -10,6 +10,10 @@ class Usuario extends MY_Controller {
                $this->load->model('advogado_model', 'advogado');
                $this->load->model('usuario_model', 'usuario');
                $this->load->model('chave_model', 'chave');
+               $this->load->model('area_model', 'area');
+               
+               $scripts = Array('cadastro.js');
+               $this->SetScript($scripts);
         }
         
     
@@ -24,12 +28,21 @@ class Usuario extends MY_Controller {
 	{
             $res = $this->chave->buscarChave($chave);
             if(is_array($res)){
+                
+               $areas = $this->area->listarTodos();
+               $tamanho = ceil(count($areas) / 3);
+               $final = count($areas) - ($tamanho * 2);
+            
+               $this->setDados('areas1', array_slice($areas, 0, $tamanho));  
+               $this->setDados('areas2', array_slice($areas, $tamanho, $tamanho));  
+               $this->setDados('areas3', array_slice($areas, ($tamanho + $tamanho), ($tamanho + $tamanho + $final)));  
                $this->setDados('chave', $res['Chave']);  
                $this->displaySite('form-usuario');
             }else{
                $this->setDados('msg', 'Usuário não encontrado!');
                $this->displaySite('tela-mensagem');
             }
+            
         }
         
         /*
