@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Chave_model extends CI_Model {
 
 	
-   public function __construct()
-   {
+    public function __construct()
+    {
          parent::__construct();
                 // Your own constructor code
-   }
+    }
  
    
  
@@ -24,7 +24,12 @@ class Chave_model extends CI_Model {
     
     
     public function buscarChave($chave){
-        return $this->db->get_where('chave', array('Chave' => $chave))->row_array();;
+        return $this->db->get_where('chave', array('Chave' => $chave, 'Estatus' => 0))->row_array();;
+    }
+    
+    public function inativaChave($id){
+        $this->db->where('ChaveId', $id)->update('chave', array('Estatus' => 1));
+        return $this->db->affected_rows();
     }
     
     

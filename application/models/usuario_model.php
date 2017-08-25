@@ -31,6 +31,10 @@ class Usuario_model extends CI_Model {
        $this->db->delete('usuario', array('UsuarioId' => $id));
        return $this->db->affected_rows(); 
     }
+    
+    public function buscarId($id){
+        return $this->db->get_where('usuario', array('UsuarioId' => $id))->row_array();
+    }
    
  
    

@@ -4,10 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller  extends CI_Controller {
     
        private $dados = Array();
+       private $chave = 'adv_pro';
     
        public function __construct()
        {
             parent::__construct();
+       }
+       
+       /* Usado para teste */
+       public function displayDados(){
+           var_dump($this->dados);
+           $this->dados = Array();
        }
         
        public function postResult($formValidate, $msg, $url = NULL)
@@ -32,9 +39,51 @@ class MY_Controller  extends CI_Controller {
             $this->load->view('base');
             $this->dados = Array(); /* Forçando a Limpeza */
        }
+       
+        public function setUsuario($dados){
+            $this->session->set_userdata($this->chave, $this->encryption->encrypt(json_encode($dados)));
+        }
+       
+       
+        public function estaLogado(){
+          return $this->session->has_userdata($this->chave);
+        }
+        
+        public function deslogar(){
+          $this->session->unset_userdata($this->chave);
+        }
+       
+        public function getUsuarioId(){
+            $url = site_url('home');
+            if(!$this->session->has_userdata($this->chave)){
+                redirect($url);
+            }else{
+                $sessao = json_decode($this->encryption->decrypt($this->session->userdata($this->chave)), True);
+                return $sessao['UsuarioId'];
+            }
+        }
+        
+        public function getUsuarioLogin(){
+            $url = site_url('home');
+            if(!$this->session->has_userdata($this->chave)){
+                redirect($url);
+            }else{
+                $sessao = json_decode($this->encryption->decrypt($this->session->userdata($this->chave)), True);
+                return $sessao['Login'];
+            }
+        }
+        
+        public function getUsuarioEstatus(){
+            $url = site_url('home');
+            if(!$this->session->has_userdata($this->chave)){
+                redirect($url);
+            }else{
+                $sessao = json_decode($this->encryption->decrypt($this->session->userdata($this->chave)), True);
+                return $sessao['Estatus'] == 1;
+            }
+        }
 	
 	
         
-        //http://localhost:27015/advogados/index.php/usuario/chave/904ecce8303932ee8dc511e90d56c9a0120170817174736000000
         
 }

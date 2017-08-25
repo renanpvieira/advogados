@@ -13,6 +13,8 @@
      
     
      function iniciaMapa() {
+         
+        if ($("#mapCadastro").length == 0){ return; }
         map = new google.maps.Map(document.getElementById('mapCadastro'), {
           center: {lat: -21.579911, lng: -43.761514},
           scrollwheel: false,
@@ -131,18 +133,19 @@
             
             form[0].value = '22.222222';
             form[1].value = '34.23232';
-            form[2].value = 'Nome teste';
-            form[3].value = 'Descricao Terste';
-            form[4].value = 'tel 1 teste';
-            form[5].value = 'Tel 2 teste';
-            form[6].value = 'ZAPZAP teste';
-            form[7].value = 'teste@teste.com.br';
-            form[8].value = 'oab teste';
-            form[9].value = 'logradouro teste';
-            form[10].value = 'numero teste';
-            form[11].value = 'bairro teste';
-            form[12].value = 'cidade teste';
-            form[13].value = '19';
+            //form[2].value = 'aaaa';
+            form[3].value = 'Nome teste Y';
+            form[4].value = 'Descricao Terste';
+            form[5].value = 'tel 1 teste';
+            form[6].value = 'Tel 2 teste';
+            form[7].value = 'ZAPZAP teste';
+            form[8].value = 'testey1@teste.com.br';
+            form[9].value = 'oab teste';
+            form[10].value = 'logradouro teste';
+            form[11].value = 'numero teste';
+            form[12].value = 'bairro teste';
+            form[13].value = 'cidade teste';
+            form[14].value = '19';
             
             
             /* PODE SER QUE O USUARIO NAO TENHA CLICADO NO BOTAO */

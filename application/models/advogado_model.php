@@ -9,6 +9,10 @@ class Advogado_model extends CI_Model {
          parent::__construct();
                 // Your own constructor code
    }
+   
+   public function inicializa(){
+       return array('Nome' => '', 'Descricao' => '', 'OAB' => '', 'Telefone1' => '', 'Telefone2' => '', 'Whatszap' => '', 'Email' => '', 'Latitude' => '', 'Longitude' => '', 'Logradouro' => '', 'Numero' => '', 'Bairro' => '', 'Cidade' => '', 'UFId' => '0');
+   }
  
    
    public function listarTodos(){
@@ -26,6 +30,15 @@ class Advogado_model extends CI_Model {
     public function salvar($dados){
        $this->db->insert('advogado', $dados);
        return (($this->db->affected_rows() > 0) ? $this->db->insert_id() : 0);
+    }
+    
+    public function buscarUsuarioId($id){
+        $this->db->select('Nome, advogado.Descricao, OAB, Telefone1, Telefone2, Whatszap, Email, Latitude, Longitude, Logradouro, Numero, Bairro, uf.UFId, cidade.Descricao as Cidade');
+        $this->db->from('advogado');
+        $this->db->join('cidade', 'advogado.CidadeId = cidade.CidadeId');
+        $this->db->join('uf', 'cidade.UFId = uf.UFId');
+        $this->db->where('advogado.UsuarioId', $id);
+        return $this->db->get()->row_array();
     }
    
  
