@@ -93,6 +93,38 @@
              $('#sidebar-adv-oab').text("Não informado!");
           }
           
+          if(dados.Email.length > 2){ 
+             $('#sidebar-adv-email').text(dados.Email);
+          }else{
+             $('#sidebar-adv-email').text("");
+          }
+          
+          var tel = dados.Telefone1;
+          if(dados.Telefone2.length > 2){ 
+            tel = tel + " / " + dados.Telefone2;
+          }
+          $('#sidebar-adv-tel').text(tel);
+          
+          if(dados.Whatszap.length > 2){ 
+             $('#sidebar-adv-zap').text("Whatsapp: " + dados.Whatszap);
+          }else{
+             $('#sidebar-adv-zap').text("");
+          }
+          
+          var endereco = dados.Logradouro;
+          if(dados.Numero.length >= 1){ endereco = endereco + ", " + dados.Numero; }
+          if(dados.Bairro.length > 2){ endereco = endereco + ", " + dados.Bairro; }
+          if(dados.Cidade.length > 2){ endereco = endereco + ", " + dados.Cidade; }
+          endereco = endereco + "  - " + dados.Sigla;
+          $('#sidebar-adv-endereco').text(endereco);
+          
+          if(dados.Areas != null && dados.Areas.length > 2){ 
+             $('#sidebar-adv-area').text(dados.Areas);
+          }else{
+             $('#sidebar-adv-area').text("Não informado");
+          }
+          
+          
           
           
           $('#sidebar').addClass('active');
@@ -139,9 +171,14 @@
         });
         
         $("button[name='btn-cadastar']").click(function () {
+            
+
+            
                   var btn = this; 
                   btn.disabled = true;// EVITA DOUBLE-CLICK
                   var form = $("form[name='cadastro']").serializeArray();
+                  
+                  console.log(form);
 
                   $.ajax({
                       type: "POST",
@@ -158,5 +195,6 @@
                   .always(function() {
                       btn.disabled = false;
                   });
+                  
          });
    });

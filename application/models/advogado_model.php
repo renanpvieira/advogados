@@ -20,11 +20,25 @@ class Advogado_model extends CI_Model {
    }
    
     public function listarTodosAtivos(){
-	$this->db->select('usuario.UsuarioId, Latitude, Longitude, Nome,  Descricao, Telefone1, Telefone2, Whatszap, Email, OAB');
+        /*
+	$this->db->select('usuario.UsuarioId, Latitude, Longitude, Nome,  advogado.Descricao, Telefone1, Telefone2, Whatszap, Email, OAB, Logradouro, Numero, Bairro, cidade.Descricao as Cidade, Sigla');
         $this->db->from('advogado');
         $this->db->join('usuario', 'advogado.UsuarioId = usuario.UsuarioId');
+        $this->db->join('cidade', 'advogado.CidadeId = cidade.CidadeId');
+        $this->db->join('uf', 'cidade.UFId = uf.UFId');
         $this->db->where('usuario.Estatus', 1);
-        return $this->db->get()->result_array();
+         * 
+         */
+        return $this->db->query("select A.AdvogadoId, U.UsuarioId, Latitude, Longitude, Nome,  A.Descricao, Telefone1, Telefone2, Whatszap, Email, OAB, Logradouro, Numero, Bairro, C.Descricao as Cidade, Sigla, GROUP_CONCAT(R.Descricao SEPARATOR ', ') as Areas
+                                from advogado A
+                                inner join usuario U on A.UsuarioId = U.UsuarioId
+                                inner join cidade C on A.CidadeId = C.CidadeId
+                                inner join uf F on C.UFId = F.UFId  
+                                left join advogado_area AA on AA.AdvogadoId = A.AdvogadoId
+                                left join area  R on R.AreaId = AA.AreaId
+                                where U.Estatus = 1 and A.Latitude is not null and A.Longitude is not null
+                                GROUP BY A.AdvogadoId
+                                order by  A.AdvogadoId Desc")->result_array();
     }
     
     public function salvar($dados){

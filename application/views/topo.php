@@ -6,7 +6,7 @@
     <title>Welcome to CodeIgniter</title>
         
     <!-- Bootstrap core CSS -->
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/advogado.css'); ?>" >
      
@@ -30,12 +30,13 @@
          }
          
          
-         nav.menu-adv {z-index: 10 !important;}
+         nav.menu-adv {z-index: 10 !important; background-color: #4D6A79 !important;}
          
          
          #sidebar-interna {background-color: #f5f5f5; padding: 28px;}
          #sidebar-interna p {color: #000000; font-size: 13px; text-align: justify; margin: 0px;}
          #sidebar-interna p.li-advogado-subtitulo { color: #9b9b9c !important; }
+         #sidebar-adv-endereco, #sidebar-adv-area {text-align:left !important;}
          
          
          .texto-msg {text-align: center; }
@@ -50,6 +51,42 @@
          
          .right {text-align: right;}
          
+         #sidebar-topo {background-color: #4D6A79 !important; width: 100%; height: 70px;}
+         #dismiss {margin-top: 9px; background-color: #4D6A79 !important; }
+         
+         #cadastro-msg {text-align: left !important; width: 100% !important;}
+         #cadastro-msg p {font-size: 13px; text-align: left !important; margin: 0px !important; padding: 0px !important; margin-bottom: 5px !important;}
+         
+         
+         .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;  /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+          }
+          
+          .material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
         
     </style>
 	
@@ -60,27 +97,31 @@
         <!-- Sidebar navigation -->
         
         <nav id="sidebar">
+            <div id="sidebar-topo">
+                <div id="dismiss"> <i class="material-icons md-36">chevron_left</i></div>
+            </div>
+            
             <div id="sidebar-interna">
-                <div id="dismiss"> <i class="glyphicon glyphicon-arrow-left"></i> </div>
                 <p class="li-advogado-subtitulo">nome</p>
+                
                 <p id="sidebar-adv-nome">Não informado</p>
                 <br />
                 <p class="li-advogado-subtitulo">experiência</p>
                 <p id="sidebar-adv-descricao">Não informado!</p>
                 <br />
                 <p class="li-advogado-subtitulo">contatos</p>
-                <p>(21) 2628-1743 / (11) 9999-2211</p>
-                <p>(11) 9999-2211</p>
-                <p>renanvieira@id.uff.br</p>
+                <p id="sidebar-adv-tel">**</p>
+                <p id="sidebar-adv-zap">**</p>
+                <p id="sidebar-adv-email">Não informado!</p>
                 <br />
                 <p class="li-advogado-subtitulo">endereço</p>
-                <p>Estrada da paciência 3355, Maria Paula, São Gonçalo - RJ</p>
+                <p id="sidebar-adv-endereco">**</p>
                 <br />
                 <p class="li-advogado-subtitulo">registro na OAB</p>
                 <p id="sidebar-adv-oab">Não informado</p>
                 <br />
                 <p class="li-advogado-subtitulo">áreas de atuação</p>
-                <p id="sidebar-adv-area">Trabalho; Cívil; Criminal.</p>
+                <p id="sidebar-adv-area">**</p>
             </div>
         </nav>
         
@@ -120,18 +161,19 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form name="cadastro" >
                     <div class="form-group">
-                      <label for="recipient-name" class="form-control-label">Nome</label>
-                      <input type="text" class="form-control" id="recipient-name" placeholder="Digite o seu nome" >
+                      <label for="recipient-name" class="form-control-label">E-mail</label>
+                      <input type="text" name="Login" class="form-control" id="recipient-name" placeholder="Digite o seu e-mail" maxlength="255">
                     </div>
                     <div class="form-group">
                       <label for="message-text" class="form-control-label">Senha</label>
-                      <input type="password" name="Senha" class="form-control" id="recipient-name" placeholder="Digite sua senha">
+                      <input type="password" name="Senha" class="form-control" id="recipient-name" placeholder="Digite sua senha" maxlength="10">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                  <div id="cadastro-msg"></div>  
                   <button type="button" name="btn-cadastar" class="btn btn-primary">Salvar</button>
                 </div>
               </div>
